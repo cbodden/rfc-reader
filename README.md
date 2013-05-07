@@ -1,4 +1,4 @@
-Description
+rfc-reader
 ====
 
 This script is used to read RFC's, and search for RFC's by syntax.
@@ -17,7 +17,7 @@ Will add this in shortly.
 License and Author
 ====
 
-Author:: Cesar Bodden (<cesar@pissedoffadmins,com>)
+Author:: Cesar Bodden (cesar@pissedoffadmins,com)
 
 Copyright:: 2013, Pissedoffadmins.com
 
