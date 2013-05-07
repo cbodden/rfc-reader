@@ -4,25 +4,23 @@ rfc-reader
 This script is used to read RFC's, and search for RFC's by syntax.
 
 
-
-Requirements
-----
-
-Less (http://www.greenwoodsoftware.com/less/)<br>
-Wget (http://www.gnu.org/software/wget/)
-cURL (http://curl.haxx.se/)
-and a terminal emulator of some sort, either:
-Xterm (http://invisible-island.net/xterm/)
-mrxvt (http://materm.sourceforge.net/)
-urxvt (http://software.schmorp.de/pkg/rxvt-unicode.html)
-
-
-
 Usage
 ----
 
 Will add this in shortly.
 
+
+Requirements
+----
+
+Less (http://www.greenwoodsoftware.com/less/)<br>
+Wget (http://www.gnu.org/software/wget/)<br>
+cURL (http://curl.haxx.se/)<br>
+and a terminal emulator of some sort, either:<br>
+~~~~
+Xterm (http://invisible-island.net/xterm/)<br>
+mrxvt (http://materm.sourceforge.net/)<br>
+urxvt (http://software.schmorp.de/pkg/rxvt-unicode.html)<br>
 
 
 License and Author
