@@ -1,8 +1,3 @@
-rfc-reader
-==========
-
-rfc-reader
-
 Description
 ====
 
