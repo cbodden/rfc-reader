@@ -11,6 +11,15 @@ set -o pipefail
 
 NAME=$(basename $0)
 
+license()
+{
+  cat <<EOL
+rfc-reader  Copyright (C) 2013 cesar@pissedoffadmins.com
+This program comes with ABSOLUTELY NO WARRANTY.
+This is free software, and you are welcome to redistribute it.
+EOL
+}
+
 version()
 {
   local VER="0.20"

@@ -2,17 +2,28 @@ rfc-reader
 ====
 
 This script is used to read RFC's, and search for RFC's by syntax.
-Its almost always under development, but is relatively working.
+
+
 
 Requirements
 ====
 
-Less, wget, curl, and a terminal emulator (either Xterm, mrxvt, or urxvt).
+Less (http://www.greenwoodsoftware.com/less/)
+Wget (http://www.gnu.org/software/wget/)
+cURL (http://curl.haxx.se/)
+and a terminal emulator of some sort, either: 
+Xterm (http://invisible-island.net/xterm/)
+mrxvt (http://materm.sourceforge.net/)
+urxvt (http://software.schmorp.de/pkg/rxvt-unicode.html)
+
+
 
 Usage
 ====
 
 Will add this in shortly.
+
+
 
 License and Author
 ====
