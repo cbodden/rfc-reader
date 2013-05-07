@@ -11,20 +11,13 @@ set -o pipefail
 
 NAME=$(basename $0)
 
-license()
-{
-  cat <<EOL
-rfc-reader  Copyright (C) 2013 cesar@pissedoffadmins.com
-This program comes with ABSOLUTELY NO WARRANTY.
-This is free software, and you are welcome to redistribute it.
-EOL
-}
-
 version()
 {
   local VER="0.20"
   printf -- "%s\n" "${NAME} version ${VER}"
-  printf -- "%s\n" "<cesar@pissedoffadmins.com> 2013"
+  printf -- "%s\n" "Copyright (C) 2013 cesar@pissedoffadmins.com"
+  printf -- "%s\n" "This program comes with ABSOLUTELY NO WARRANTY."
+  printf -- "%s\n" "This is free software, and you are welcome to redistribute it."
   printf -- "%s\n"
 }
 
