@@ -32,18 +32,18 @@ Usage examples:
 Requirements
 ----
 
-Less (http://www.greenwoodsoftware.com/less/)<br>
-Wget (http://www.gnu.org/software/wget/)<br>
-cURL (http://curl.haxx.se/)<br>
-<br>and a terminal emulator of some sort, either:<br>
-Xterm (http://invisible-island.net/xterm/)<br>
-mrxvt (http://materm.sourceforge.net/)<br>
-urxvt (http://software.schmorp.de/pkg/rxvt-unicode.html)<br>
+- Less (http://www.greenwoodsoftware.com/less/)
+- Wget (http://www.gnu.org/software/wget/)
+- cURL (http://curl.haxx.se/)
+- and a terminal emulator of some sort, either:
+- Xterm (http://invisible-island.net/xterm/)
+- mrxvt (http://materm.sourceforge.net/)
+- urxvt (http://software.schmorp.de/pkg/rxvt-unicode.html)
 
 Todo
 ----
 
-Add a log to show what you have searched for or read.
+- Add a log to show what you have searched for or read.
 
 
 License and Author
