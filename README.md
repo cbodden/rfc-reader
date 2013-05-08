@@ -40,6 +40,11 @@ Xterm (http://invisible-island.net/xterm/)<br>
 mrxvt (http://materm.sourceforge.net/)<br>
 urxvt (http://software.schmorp.de/pkg/rxvt-unicode.html)<br>
 
+Todo
+----
+
+Add a log to show what you have searched for or read.
+
 
 License and Author
 ----
