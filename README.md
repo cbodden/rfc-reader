@@ -40,7 +40,7 @@ Requirements
 - mrxvt (http://materm.sourceforge.net/)
 - urxvt (http://software.schmorp.de/pkg/rxvt-unicode.html)
 
-Todo
+Todo / Add
 ----
 
 - Add a log to show what you have searched for or read.
