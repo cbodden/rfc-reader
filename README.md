@@ -8,15 +8,15 @@ It has support for BCP, FYI, IEN, STD, & RFC.
 Usage
 ----
 
-<pre><code>
-Usage: rfc-editor <name (-n)|read (-r)|search (-s)> <####> <bcp|fyi|ien|std|rfc>
+&lt;pre&gt;&lt;code&gt;
+Usage: rfc-editor &lt;name (-n)|read (-r)|search (-s)&gt; &lt;####&gt; &lt;bcp|fyi|ien|std|rfc&gt;
 
 Usage examples:
   rfc-editor name 3334 rfc     # displays RFC #3334 name
     ex: 3334 Policy-Based Accounting. T. Zseby, S. Zander, C. Carle. October
              2002. (Format: TXT=103014 bytes) (Status: EXPERIMENTAL)
 
-  rfc-editor search <term> rfc # Displays index of matches with RFC #'s
+  rfc-editor search &lt;term&gt; rfc # Displays index of matches with RFC #'s
     ex: rfc-editor search transport rfc
 
         0905 ISO Transport Protocol specification ISO DP 8073. ISO. April
