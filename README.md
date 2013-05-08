@@ -8,7 +8,7 @@ It has support for BCP, FYI, IEN, STD, & RFC.
 Usage
 ----
 
-&lt;pre&gt;&lt;code&gt;
+<pre><code>
 Usage: rfc-editor &lt;name (-n)|read (-r)|search (-s)&gt; &lt;####&gt; &lt;bcp|fyi|ien|std|rfc&gt;
 
 Usage examples:
