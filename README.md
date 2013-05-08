@@ -8,7 +8,7 @@ It has support for BCP, FYI, IEN, STD, & RFC.
 Usage
 ----
 
-<code>
+<pre><code>
 Usage: rfc-editor <name (-n)|read (-r)|search (-s)> <####> <bcp|fyi|ien|std|rfc>
 
 Usage examples:
@@ -27,7 +27,7 @@ Usage examples:
              Department of Defense data networks. National Research Council.
              February 1985. (Format: TXT=42345 bytes) (Status: UNKNOWN)
 
-  rfc-editor read 38 fyi       # read fyi #38</code>
+  rfc-editor read 38 fyi       # read fyi #38</code></pre>
 
 Requirements
 ----
