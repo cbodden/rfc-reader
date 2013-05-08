@@ -1,7 +1,8 @@
 rfc-reader
 ====
 
-This script is used to read RFC's, and search for RFC's by syntax.
+This script is used to read RFC's, and search for RFC's by syntax.<br>
+It has support for BCP, FYI, IEN, STD, & RFC.
 
 
 Usage
