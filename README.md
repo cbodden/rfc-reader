@@ -8,8 +8,26 @@ It has support for BCP, FYI, IEN, STD, & RFC.
 Usage
 ----
 
-Will add this in shortly.
+<code>
+Usage: rfc-editor <name (-n)|read (-r)|search (-s)> <####> <bcp|fyi|ien|std|rfc>
 
+Usage examples:
+  rfc-editor name 3334 rfc     # displays RFC #3334 name
+    ex: 3334 Policy-Based Accounting. T. Zseby, S. Zander, C. Carle. October
+             2002. (Format: TXT=103014 bytes) (Status: EXPERIMENTAL)
+
+  rfc-editor search <term> rfc # Displays index of matches with RFC #'s
+    ex: rfc-editor search transport rfc
+
+        0905 ISO Transport Protocol specification ISO DP 8073. ISO. April
+             1984. (Format: TXT=249214 bytes) (Obsoletes RFC0892) (Status:
+             UNKNOWN)
+
+        0939 Executive summary of the NRC report on transport protocols for
+             Department of Defense data networks. National Research Council.
+             February 1985. (Format: TXT=42345 bytes) (Status: UNKNOWN)
+
+  rfc-editor read 38 fyi       # read fyi #38</code>
 
 Requirements
 ----

@@ -33,15 +33,15 @@ usage()
 {
   #clear
   printf -- "%s\n"
-  printf -- "%s\n" "Usage: ${NAME} <name (-n)|read (-r)|search (-s)> <####>"
+  printf -- "%s\n" "Usage: ${NAME} <name (-n)|read (-r)|search (-s)> <####> <bcp|fyi|ien|std|rfc>"
   printf -- "%s\n"
   printf -- "%s\n" "Usage examples:"
-  printf -- "%s\n" "  ${NAME} name 3334     # displays RFC 3334 name"
+  printf -- "%s\n" "  ${NAME} name 3334 rfc     # displays RFC #3334 name"
   printf -- "%s\n" "    ex: 3334 Policy-Based Accounting. T. Zseby, S. Zander, C. Carle. October"
   printf -- "%s\n" "             2002. (Format: TXT=103014 bytes) (Status: EXPERIMENTAL)"
   printf -- "%s\n"
-  printf -- "%s\n" "  ${NAME} search <term> # Displays index of matches with RFC #'s"
-  printf -- "%s\n" "    ex: ${NAME} search transport"
+  printf -- "%s\n" "  ${NAME} search <term> rfc # Displays index of matches with RFC #'s"
+  printf -- "%s\n" "    ex: ${NAME} search transport rfc"
   printf -- "%s\n"
   printf -- "%s\n" "        0905 ISO Transport Protocol specification ISO DP 8073. ISO. April"
   printf -- "%s\n" "             1984. (Format: TXT=249214 bytes) (Obsoletes RFC0892) (Status:"
@@ -51,7 +51,7 @@ usage()
   printf -- "%s\n" "             Department of Defense data networks. National Research Council."
   printf -- "%s\n" "             February 1985. (Format: TXT=42345 bytes) (Status: UNKNOWN)"
   printf -- "%s\n"
-  printf -- "%s\n" "  ${NAME} read 1443     # read RFC 1443"
+  printf -- "%s\n" "  ${NAME} read 38 fyi       # read fyi #38"
   printf -- "%s\n"
 }
 
