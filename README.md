@@ -32,6 +32,7 @@ Usage examples:
 Requirements
 ----
 
+- Bash (http://tiswww.case.edu/php/chet/bash/bashtop.html)
 - Less (http://www.greenwoodsoftware.com/less/)
 - Wget (http://www.gnu.org/software/wget/)
 - cURL (http://curl.haxx.se/)
