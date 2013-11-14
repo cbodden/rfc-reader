@@ -13,11 +13,13 @@ NAME=$(basename $0)
 version()
 {
   local VER="0.25"
-  printf -- "%s\n" "${NAME} version ${VER}"
-  printf -- "%s\n" "Copyright (C) 2013 cesar@pissedoffadmins.com"
-  printf -- "%s\n" "This program comes with ABSOLUTELY NO WARRANTY."
-  printf -- "%s\n" "This is free software, and you are welcome to redistribute it."
-  printf -- "%s\n"
+cat <<EOL
+${NAME} version ${VER}
+Copyright (C) 2013 cesar@pissedoffadmins.com
+This program comes with ABSOLUTELY NO WARRANTY.
+This is free software, and you are welcome to redistribute it.
+
+EOL
 }
 
 descrip()
@@ -31,28 +33,28 @@ EOL
 
 usage()
 {
-  #clear
-  printf -- "%s\n"
-  printf -- "%s\n" "Usage: ${NAME} <name (-n)|read (-r)|search (-s)> <####> <bcp|fyi|ien|std|rfc>"
-  printf -- "%s\n"
-  printf -- "%s\n" "Usage examples:"
-  printf -- "%s\n" "  ${NAME} name 3334 rfc     # displays RFC #3334 name"
-  printf -- "%s\n" "    ex: 3334 Policy-Based Accounting. T. Zseby, S. Zander, C. Carle. October"
-  printf -- "%s\n" "             2002. (Format: TXT=103014 bytes) (Status: EXPERIMENTAL)"
-  printf -- "%s\n"
-  printf -- "%s\n" "  ${NAME} search <term> rfc # Displays index of matches with RFC #'s"
-  printf -- "%s\n" "    ex: ${NAME} search transport rfc"
-  printf -- "%s\n"
-  printf -- "%s\n" "        0905 ISO Transport Protocol specification ISO DP 8073. ISO. April"
-  printf -- "%s\n" "             1984. (Format: TXT=249214 bytes) (Obsoletes RFC0892) (Status:"
-  printf -- "%s\n" "             UNKNOWN)"
-  printf -- "%s\n"
-  printf -- "%s\n" "        0939 Executive summary of the NRC report on transport protocols for"
-  printf -- "%s\n" "             Department of Defense data networks. National Research Council."
-  printf -- "%s\n" "             February 1985. (Format: TXT=42345 bytes) (Status: UNKNOWN)"
-  printf -- "%s\n"
-  printf -- "%s\n" "  ${NAME} read 38 fyi       # read fyi #38"
-  printf -- "%s\n"
+  cat <<EOL
+Usage: ${NAME} <name (-n)|read (-r)|search (-s)> <####> <bcp|fyi|ien|std|rfc>
+
+Usage examples:
+  ${NAME} name 3334 rfc     # displays RFC #3334 name
+    ex: 3334 Policy-Based Accounting. T. Zseby, S. Zander, C. Carle. October
+             2002. (Format: TXT=103014 bytes) (Status: EXPERIMENTAL)
+
+  ${NAME} search <term> rfc # Displays index of matches with RFC #'s
+    ex: ${NAME} search transport rfc
+
+        0905 ISO Transport Protocol specification ISO DP 8073. ISO. April
+             1984. (Format: TXT=249214 bytes) (Obsoletes RFC0892) (Status:
+             UNKNOWN)
+
+        0939 Executive summary of the NRC report on transport protocols for
+             Department of Defense data networks. National Research Council.
+             February 1985. (Format: TXT=42345 bytes) (Status: UNKNOWN)
+
+  ${NAME} read 38 fyi       # read fyi #38
+
+EOL
 }
 
 
