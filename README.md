@@ -10,6 +10,7 @@ Usage
 
 <pre><code>
 Usage: rfc-editor &lt;name (-n)|read (-r)|search (-s)&gt; &lt;####&gt; &lt;bcp|fyi|ien|std|rfc&gt;
+       rfc-editor &lt;latest&gt;
 
 Usage examples:
   rfc-editor name 3334 rfc     # displays RFC #3334 name

@@ -36,6 +36,7 @@ usage()
 {
   cat <<EOL
 Usage: ${NAME} <name (-n)|read (-r)|search (-s)> <####> <bcp|fyi|ien|std|rfc>
+       ${NAME} <latest>
 
 Usage examples:
   ${NAME} name 3334 rfc     # displays RFC #3334 name
