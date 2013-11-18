@@ -27,7 +27,9 @@ Usage examples:
              Department of Defense data networks. National Research Council.
              February 1985. (Format: TXT=42345 bytes) (Status: UNKNOWN)
 
-  rfc-editor read 38 fyi       # read fyi #38</code></pre>
+  rfc-editor read 38 fyi       # read fyi #38
+  
+  rfc-editor latest            # shows list of latest rfc's</code></pre>
 
 Requirements
 ----

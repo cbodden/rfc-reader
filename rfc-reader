@@ -55,6 +55,8 @@ Usage examples:
 
   ${NAME} read 38 fyi       # read fyi #38
 
+  ${NAME} latest            # shows list of latest rfc's
+
 EOL
 }
 
@@ -68,6 +70,7 @@ trap "rm -rf ${TMP_FILE}" 0 1 2 3 15
 # check if $1 != "search" || -s
 case "${1}" in
   'search'|'-s') ;;
+  'latest'|'-l') ;;
   'name'|'-n'|'read'|'-r')
     # check if $# -ge 2 && $2 is an integer
     [ $# -ge 2 ] || { version; descrip; usage; exit 1; }
@@ -95,11 +98,21 @@ case "${EM}" in
   'urxvt') EM=$(which urxvt 2>/dev/null) ;;
 esac
 EM_SETTINGS="-fg green -bg black -bd green -g 72x59 -T"
+EM_SETTINGS_LATEST="-fg green -bg black -bd green -g 75x59 -T"
 EM_TITLE="${NAME} - rfc${FN}.txt"
 PAGER=`which less`
 
 # begin working section of the script
 case "${1}" in
+  'latest'|'-l')
+    printf -- "%s\n" "Downloading latest rfc list"
+    curl -f -s http://www.rfc-editor.org/rfc/rfc-index-latest.txt | \
+      awk '{line++; print}; /\f/ {for (i=line; i<=80; i++) print ""; line=0}' | \
+      sed '/\f/d' > "${TMP_FILE}"
+      printf -- "%s\n" "Showing latest rfc's"
+      ${EM} ${EM_SETTINGS_LATEST} "${EM_TITLE}" -e ${PAGER} "${TMP_FILE}"
+  ;;
+
   'name'|'-n')
     case "${FN}" in
       [0-9]|[0-9][0-9]|[0-9][0-9][0-9]|[0-9][0-9][0-9][0-9])
