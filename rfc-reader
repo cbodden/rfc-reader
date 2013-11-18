@@ -75,7 +75,8 @@ case "${1}" in
   'name'|'-n'|'read'|'-r')
     # check if $# -ge 2 && $2 is an integer
     [ $# -ge 2 ] || { version; descrip; usage; exit 1; }
-    [ ${2} -ne 0 -o ${2} -eq 0 2>/dev/null ] || { version; descrip; usage; exit 1; }
+    [ ${2} -ne 0 -o ${2} -eq 0 2>/dev/null ] ||
+      { version; descrip; usage; exit 1; }
     # prepend zeros to make id number <####>
     FN=`printf "%04d" ${2} | xargs`
   ;;
@@ -108,7 +109,7 @@ case "${1}" in
   'latest'|'-l')
     printf -- "%s\n" "Downloading latest rfc list"
     curl -f -s http://www.rfc-editor.org/rfc/rfc-index-latest.txt | \
-      awk '{line++; print}; /\f/ {for (i=line; i<=80; i++) print ""; line=0}' | \
+      awk '{line++;print}; /\f/ {for (i=line;i<=80;i++) print ""; line=0}' | \
       sed '/\f/d' > "${TMP_FILE}"
       printf -- "%s\n" "Showing latest rfc's"
       ${EM} ${EM_SETTINGS_LATEST} "${EM_TITLE}" -e ${PAGER} "${TMP_FILE}"
@@ -129,12 +130,12 @@ case "${1}" in
     if [ -z $(wget -q --spider ${ADDRESS}${2}.txt || echo $?) ]; then
       printf -- "%s\n" "Downloading ${FN}"
       curl -f -s ${ADDRESS}${2}.txt | \
-        awk '{line++; print}; /\f/ {for (i=line; i<=58; i++) print ""; line=0}' | \
+        awk '{line++;print}; /\f/ {for (i=line;i<=58;i++) print "";line=0}' | \
         sed '/\f/d' > "${TMP_FILE}"
       printf -- "%s\n" "Showing ${FN}"
       ${EM} ${EM_SETTINGS} "${EM_TITLE}" -e ${PAGER} "${TMP_FILE}"
     else
-      printf -- "%s\n" "File does not exist or might not be TXT. Check RFC number : ${FN}"
+      printf -- "%s\n" "File does not exist or is not TXT. Check RFC # : ${FN}"
       usage
     fi
   ;;
@@ -145,7 +146,7 @@ case "${1}" in
       FL=`echo ${F} | tr -s '[:upper:]' '[:lower:]'`
     CW=`echo ${2} | cut -c2-`
     curl -s ${ADDRESS}-index.txt | \
-      awk 'BEGIN{FS="\n";RS="";ORS="\n\n"}/'[${FU}${FL}]${CW}'/' > "${TMP_FILE}"
+      awk 'BEGIN{FS="\n";RS="";ORS="\n\n"}/'[${FU}${FL}]${CW}'/' >"${TMP_FILE}"
     printf -- "%s\n" "Showing search for '${FL}${CW}'"
     ${EM} ${EM_SETTINGS} "${EM_TITLE}" -e ${PAGER} "${TMP_FILE}"
   ;;
