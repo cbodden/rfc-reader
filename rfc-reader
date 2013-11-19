@@ -25,7 +25,7 @@ EOL
 descrip()
 {
   cat <<EOL
-This is a simple script that will show you either show the
+This is a simple script that will show you either the
 name / subject of an RFC, let you read an RFC, or let you
 search for an RFC.
 
