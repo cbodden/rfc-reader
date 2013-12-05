@@ -108,16 +108,13 @@ fi
 
 case "${EM}" in
   'xterm') EM=$(which xterm 2>/dev/null)
-    EM_ST="+sb -fg green -bg black -bd green -geometry 72x59 -title"
-    EM_ST_LT="+sb -fg green -bg black -bd green -geometry 75x59 -title"
+    EM_ST="+sb -fg green -bg black -bd green -geometry 75x59 -title"
   ;;
   'mrxvt') EM=$(which mrxvt 2>/dev/null)
-    EM_ST="-bl -hb -aht -fg green -bg black -bd green -g 72x59 -title"
-    EM_ST_LT="-bl -hb -aht -fg green -bg black -bd green -g 75x59 -title"
+    EM_ST="-bl -hb -aht -fg green -bg black -bd green -g 75x59 -title"
   ;;
   'urxvt') EM=$(which urxvt 2>/dev/null)
-    EM_ST="-fg green -bg black -bd green -g 72x59 -T"
-    EM_ST_LT="-fg green -bg black -bd green -g 75x59 -T"
+    EM_ST="-fg green -bg black -bd green -g 75x59 -T"
   ;;
 esac
 EM_TITLE="${NAME} - rfc${FN}.txt"
@@ -131,7 +128,7 @@ case "${1}" in
       awk '{line++;print}; /\f/ {for (i=line;i<=80;i++) print ""; line=0}' | \
       sed '/\f/d' > "${TMP_FILE}"
       printf -- "%s\n" "Showing latest rfc's"
-      ${EM} ${EM_ST_LT} "${EM_TITLE}" -e ${PAGER} "${TMP_FILE}"
+      ${EM} ${EM_ST} "${EM_TITLE}" -e ${PAGER} "${TMP_FILE}"
   ;;
 
   'name'|'-n')
