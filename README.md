@@ -47,7 +47,6 @@ Requirements
 Todo / Add
 ----
 
-- Add a log to show what you have searched for or read.
 
 
 License and Author
