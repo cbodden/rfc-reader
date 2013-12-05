@@ -63,8 +63,8 @@ EOL
 
 # temp file and trap statement - trap for clean end
 case "$(uname 2>/dev/null)" in
-  'Linux') TMP_FILE=$(mktemp --tmpdir rfc.$$.XXXXXXXXXX);;
-  'Darwin') TMP_FILE=$(mktemp rfc.$$.XXXXXXXXXX);;
+  'Linux') TMP_FILE=$(mktemp --tmpdir rfc.$$.XXXXXXXXXX) ;;
+  'Darwin') TMP_FILE=$(mktemp rfc.$$.XXXXXXXXXX) ;;
 esac
 trap "rm -rf ${TMP_FILE}" 0 1 2 3 15
 
@@ -98,41 +98,44 @@ case "${TYPE}" in
 esac
 
 # emulator / viewer settings and checks
-printf -- "%s\n" "Here are the terminals available, choose one:"
-TM=0
-[[ -n $(command -v xterm) ]] && { echo xterm; TM=$((TM+1)); }
-[[ -n $(command -v mrxvt) ]] && { echo mrxvt; TM=$((TM+1)); }
-[[ -n $(command -v urxvt) ]] && { echo urxvt; TM=$((TM+1)); }
+if [ ${OPTION} != name ]; then
+  printf -- "%s\n" "Here are the terminals available, choose one:"
+  TM=0
+  [[ -n $(command -v xterm) ]] && { echo xterm; TM=$((TM+1)); }
+  [[ -n $(command -v mrxvt) ]] && { echo mrxvt; TM=$((TM+1)); }
+  [[ -n $(command -v urxvt) ]] && { echo urxvt; TM=$((TM+1)); }
 
-if [ ${TM} -eq 0 ]; then
-  printf -- "Error: Terminal not found \n\n"; usage; exit 1
-else
-  printf "%s" "Enter Term and press [ENTER]: "
-  read EM
-  EM=`echo ${EM} | tr '[:upper:]' '[:lower:]'`
+  if [ ${TM} -eq 0 ]; then
+    printf -- "Error: Terminal not found \n\n"; usage; exit 1
+  else
+    printf "%s" "Enter Term and press [ENTER]: "
+    read TERM
+    EM=`echo ${EM} | tr '[:upper:]' '[:lower:]'`
+  fi
+
+  case "${TERM}" in
+    'xterm') EM=$(which xterm 2>/dev/null)
+      EM_ST="+sb -fg green -bg black -bd green -geometry 75x59 -title"
+    ;;
+    'mrxvt') EM=$(which mrxvt 2>/dev/null)
+      EM_ST="-bl -hb -aht -fg green -bg black -bd green -g 75x59 -title"
+    ;;
+    'urxvt') EM=$(which urxvt 2>/dev/null)
+      EM_ST="-fg green -bg black -bd green -g 75x59 -T"
+    ;;
+    *) printf -- "Error: Terminal \"${EM}\" not found \n\n"; usage; exit 1
+  esac
+  EM_TITLE="${NAME} - rfc${FN}.txt"
+  PAGER=`which less`
 fi
 
-case "${EM}" in
-  'xterm') EM=$(which xterm 2>/dev/null)
-    EM_ST="+sb -fg green -bg black -bd green -geometry 75x59 -title"
-  ;;
-  'mrxvt') EM=$(which mrxvt 2>/dev/null)
-    EM_ST="-bl -hb -aht -fg green -bg black -bd green -g 75x59 -title"
-  ;;
-  'urxvt') EM=$(which urxvt 2>/dev/null)
-    EM_ST="-fg green -bg black -bd green -g 75x59 -T"
-  ;;
-  *) printf -- "Error: Terminal \"${EM}\" not found \n\n"; usage; exit 1
-esac
-EM_TITLE="${NAME} - rfc${FN}.txt"
-PAGER=`which less`
 
 # begin working section of the script
 
 LOGD()
 {
   LOGFILE=/tmp/$0
-  echo `date "+%Y%m%d_%H%M"` [${1}] ${2} ${3} >> ${LOGFILE}
+  echo `date "+%Y%m%d_%H%M"` [${1}] ${2} ${3} ${4} >> ${LOGFILE}
 }
 
 # case "${OPTION}" in
@@ -142,7 +145,7 @@ case "${OPTION}" in
     curl -f -s http://www.rfc-editor.org/rfc/rfc-index-latest.txt | \
       awk '{line++;print}; /\f/ {for (i=line;i<=80;i++) print ""; line=0}' | \
       sed '/\f/d' > "${TMP_FILE}"
-      LOGD latest
+      LOGD latest ${TERM}
       printf -- "%s\n" "Showing latest rfc's"
       ${EM} ${EM_ST} "${EM_TITLE}" -e ${PAGER} "${TMP_FILE}"
   ;;
@@ -154,6 +157,7 @@ case "${OPTION}" in
         awk '/'${NUM}'/ {print}'
       curl -s ${ADDRESS}-index.txt | \
         awk '/^'${FN}'/ {do_print=1} do_print==1 {print} NF==0 {do_print=0}'
+      LOGD name ${NUM} ${TYPE}
       ;;
     *) printf -- "Error: unknown parameter '%s'\n" "$2"; usage; exit 1 ;;
     esac
@@ -165,7 +169,7 @@ case "${OPTION}" in
       curl -f -s ${ADDRESS}${NUM}.txt | \
         awk '{line++;print}; /\f/ {for (i=line;i<=58;i++) print "";line=0}' | \
         sed '/\f/d' > "${TMP_FILE}"
-      LOGD read ${TYPE} ${NUM}
+      LOGD read ${TYPE} ${NUM} ${TERM}
       printf -- "%s\n" "Showing ${FN}"
       ${EM} ${EM_ST} "${EM_TITLE}" -e ${PAGER} "${TMP_FILE}"
     else
@@ -181,7 +185,7 @@ case "${OPTION}" in
     CW=`echo ${NUM} | cut -c2-`
     curl -s ${ADDRESS}-index.txt | \
       awk 'BEGIN{FS="\n";RS="";ORS="\n\n"}/'[${FU}${FL}]${CW}'/' >"${TMP_FILE}"
-    LOGD search ${NUM}
+    LOGD search ${NUM} 
     printf -- "%s\n" "Showing search for '${FL}${CW}'"
     ${EM} ${EM_ST} "${EM_TITLE}" -e ${PAGER} "${TMP_FILE}"
   ;;
