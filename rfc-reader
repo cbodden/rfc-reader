@@ -130,8 +130,7 @@ if [ ${OPTION} != name ]; then
 fi
 
 # logging function
-# output is format : date option num type term
-# as set in all the option cases
+# output is format : date option num type term # as set in all the option cases
 LOGD()
 {
   LOGFILE=/tmp/$0
