@@ -8,6 +8,7 @@
 
 set -e
 set -o pipefail
+clear
 NAME=$(basename $0)
 
 version()
@@ -99,11 +100,12 @@ TM=0
 [[ -n $(command -v mrxvt) ]] && { echo mrxvt; TM=$((TM+1)); }
 [[ -n $(command -v urxvt) ]] && { echo urxvt; TM=$((TM+1)); }
 
-if [ $TM -eq 0 ]; then
+if [ ${TM} -eq 0 ]; then
   printf -- "Error: Terminal not found \n\n"; usage; exit 1
 else
-  printf "%s" "Enter term and press [ENTER]: "
+  printf "%s" "Enter Term and press [ENTER]: "
   read EM
+  EM=`echo ${EM} | tr '[:upper:]' '[:lower:]'`
 fi
 
 case "${EM}" in
@@ -116,6 +118,7 @@ case "${EM}" in
   'urxvt') EM=$(which urxvt 2>/dev/null)
     EM_ST="-fg green -bg black -bd green -g 75x59 -T"
   ;;
+  *) printf -- "Error: Terminal \"${EM}\" not found \n\n"; usage; exit 1
 esac
 EM_TITLE="${NAME} - rfc${FN}.txt"
 PAGER=`which less`
