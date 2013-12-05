@@ -12,7 +12,7 @@ NAME=$(basename $0)
 
 version()
 {
-  local VER="0.25"
+  local VER="0.35"
 cat <<EOL
 ${NAME} version ${VER}
 Copyright (C) 2013 cesar@pissedoffadmins.com
@@ -112,7 +112,7 @@ case "${EM}" in
     EM_ST_LT="+sb -fg green -bg black -bd green -geometry 75x59 -title"
   ;;
   'mrxvt') EM=$(which mrxvt 2>/dev/null)
-    EM_ST="-hb -aht -fg green -bg black -bd green -g 72x59 -title"
+    EM_ST="-bl -hb -aht -fg green -bg black -bd green -g 72x59 -title"
     EM_ST_LT="-bl -hb -aht -fg green -bg black -bd green -g 75x59 -title"
   ;;
   'urxvt') EM=$(which urxvt 2>/dev/null)
