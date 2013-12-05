@@ -66,7 +66,7 @@ case "$(uname 2>/dev/null)" in
   'Linux') TMP_FILE=$(mktemp --tmpdir rfc.$$.XXXXXXXXXX) ;;
   'Darwin') TMP_FILE=$(mktemp rfc.$$.XXXXXXXXXX) ;;
 esac
-trap "rm -rf ${TMP_FILE}" 0 1 2 3 15
+trap "rm -rf ${TMP_FILE}" 0 1 2 3 9 15
 
 # changing order for function handling
 OPTION=$1
@@ -129,16 +129,14 @@ if [ ${OPTION} != name ]; then
   PAGER=`which less`
 fi
 
-
-# begin working section of the script
-
+# logging function
 LOGD()
 {
   LOGFILE=/tmp/$0
   echo `date "+%Y%m%d_%H%M"` [${1}] ${2} ${3} ${4} >> ${LOGFILE}
 }
 
-# case "${OPTION}" in
+# the gooey nougat of the script
 case "${OPTION}" in
   'latest'|'-l')
     printf -- "%s\n" "Downloading latest rfc list"
@@ -185,7 +183,7 @@ case "${OPTION}" in
     CW=`echo ${NUM} | cut -c2-`
     curl -s ${ADDRESS}-index.txt | \
       awk 'BEGIN{FS="\n";RS="";ORS="\n\n"}/'[${FU}${FL}]${CW}'/' >"${TMP_FILE}"
-    LOGD search ${NUM} 
+    LOGD search ${NUM}
     printf -- "%s\n" "Showing search for '${FL}${CW}'"
     ${EM} ${EM_ST} "${EM_TITLE}" -e ${PAGER} "${TMP_FILE}"
   ;;
