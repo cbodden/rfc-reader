@@ -130,10 +130,13 @@ if [ ${OPTION} != name ]; then
 fi
 
 # logging function
+# output is format : date option num type term
+# as set in all the option cases
 LOGD()
 {
   LOGFILE=/tmp/$0
-  echo `date "+%Y%m%d_%H%M"` [${1}] ${2} ${3} ${4} >> ${LOGFILE}
+  printf "%-14s %-8s %-5s %-4s %-4s\n" `date "+%Y%m%d_%H%M"` \
+    "[${1}]" "${2}" "${3}" "${4}" >> ${LOGFILE}
 }
 
 # the gooey nougat of the script
@@ -143,7 +146,7 @@ case "${OPTION}" in
     curl -f -s http://www.rfc-editor.org/rfc/rfc-index-latest.txt | \
       awk '{line++;print}; /\f/ {for (i=line;i<=80;i++) print ""; line=0}' | \
       sed '/\f/d' > "${TMP_FILE}"
-      LOGD latest ${TERM}
+      LOGD latest - - ${TERM}
       printf -- "%s\n" "Showing latest rfc's"
       ${EM} ${EM_ST} "${EM_TITLE}" -e ${PAGER} "${TMP_FILE}"
   ;;
@@ -153,7 +156,7 @@ case "${OPTION}" in
       [0-9]|[0-9][0-9]|[0-9][0-9][0-9]|[0-9][0-9][0-9][0-9])
       curl -s ${ADDRESS}-index.txt | \
         awk '/^'${FN}'/ {do_print=1} do_print==1 {print} NF==0 {do_print=0}'
-      LOGD name ${NUM} ${TYPE}
+      LOGD name ${NUM} ${TYPE} -
       ;;
     *) printf -- "Error: unknown parameter '%s'\n" "$2"; usage; exit 1 ;;
     esac
@@ -165,7 +168,7 @@ case "${OPTION}" in
       curl -f -s ${ADDRESS}${NUM}.txt | \
         awk '{line++;print}; /\f/ {for (i=line;i<=58;i++) print "";line=0}' | \
         sed '/\f/d' > "${TMP_FILE}"
-      LOGD read ${TYPE} ${NUM} ${TERM}
+      LOGD read ${NUM} ${TYPE} ${TERM}
       printf -- "%s\n" "Showing ${FN}"
       ${EM} ${EM_ST} "${EM_TITLE}" -e ${PAGER} "${TMP_FILE}"
     else
@@ -181,7 +184,7 @@ case "${OPTION}" in
     CW=`echo ${NUM} | cut -c2-`
     curl -s ${ADDRESS}-index.txt | \
       awk 'BEGIN{FS="\n";RS="";ORS="\n\n"}/'[${FU}${FL}]${CW}'/' >"${TMP_FILE}"
-    LOGD search ${NUM}
+    LOGD search ${NUM} - -
     printf -- "%s\n" "Showing search for '${FL}${CW}'"
     ${EM} ${EM_ST} "${EM_TITLE}" -e ${PAGER} "${TMP_FILE}"
   ;;
