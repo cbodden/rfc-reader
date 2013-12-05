@@ -110,19 +110,17 @@ case "${EM}" in
   'xterm') EM=$(which xterm 2>/dev/null)
     EM_ST="+sb -fg green -bg black -bd green -geometry 72x59 -title"
     EM_ST_LT="+sb -fg green -bg black -bd green -geometry 75x59 -title"
-    EM_TITLE="${NAME} - rfc${FN}.txt"
   ;;
   'mrxvt') EM=$(which mrxvt 2>/dev/null)
     EM_ST="-hb -aht -fg green -bg black -bd green -g 72x59 -title"
     EM_ST_LT="-bl -hb -aht -fg green -bg black -bd green -g 75x59 -title"
-    EM_TITLE="${NAME} - rfc${FN}.txt"
   ;;
   'urxvt') EM=$(which urxvt 2>/dev/null)
     EM_ST="-fg green -bg black -bd green -g 72x59 -T"
     EM_ST_LT="-fg green -bg black -bd green -g 75x59 -T"
-    EM_TITLE="${NAME} - rfc${FN}.txt"
   ;;
 esac
+EM_TITLE="${NAME} - rfc${FN}.txt"
 PAGER=`which less`
 
 # begin working section of the script
