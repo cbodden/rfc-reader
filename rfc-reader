@@ -110,7 +110,7 @@ if [ ${OPTION} != name ]; then
   else
     printf "%s" "Enter Term and press [ENTER]: "
     read TERM
-    EM=`echo ${EM} | tr '[:upper:]' '[:lower:]'`
+    TERM=`echo ${TERM} | tr '[:upper:]' '[:lower:]'`
   fi
 
   case "${TERM}" in
