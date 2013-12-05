@@ -94,12 +94,17 @@ esac
 
 # emulator / viewer settings and checks
 printf -- "%s\n" "Here are the terminals available, choose one:"
-[[ -n $(command -v xterm) ]] && echo xterm
-[[ -n $(command -v mrxvt) ]] && echo mrxvt
-[[ -n $(command -v urxvt) ]] && echo urxvt
+TM=0
+[[ -n $(command -v xterm) ]] && { echo xterm; TM=$((TM+1)); }
+[[ -n $(command -v mrxvt) ]] && { echo mrxvt; TM=$((TM+1)); }
+[[ -n $(command -v urxvt) ]] && { echo urxvt; TM=$((TM+1)); }
 
-printf "%s" "Enter term and press [ENTER]: "
-read EM
+if [ $TM -eq 0 ]; then
+  printf -- "Error: Terminal not found \n\n"; usage; exit 1
+else
+  printf "%s" "Enter term and press [ENTER]: "
+  read EM
+fi
 
 case "${EM}" in
   'xterm') EM=$(which xterm 2>/dev/null)
