@@ -92,16 +92,32 @@ case "${3}" in
   *) ADDRESS="http://www.rfc-editor.org/rfc/rfc" ;;
 esac
 
-# emulator / viewer settings
-[[ -n $(command -v xterm) ]] && EM="xterm" || EM="urxvt"
+# emulator / viewer settings and checks
+printf -- "%s\n" "Here are the terminals available, choose one:"
+[[ -n $(command -v xterm) ]] && echo xterm
+[[ -n $(command -v mrxvt) ]] && echo mrxvt
+[[ -n $(command -v urxvt) ]] && echo urxvt
+
+printf "%s" "Enter term and press [ENTER]: "
+read EM
+
 case "${EM}" in
-  'xterm') EM=$(which xterm 2>/dev/null) ;;
-  'mrxvt') EM=$(which mrxvt 2>/dev/null) ;;
-  'urxvt') EM=$(which urxvt 2>/dev/null) ;;
+  'xterm') EM=$(which xterm 2>/dev/null)
+    EM_ST="+sb -fg green -bg black -bd green -geometry 72x59 -title"
+    EM_ST_LT="+sb -fg green -bg black -bd green -geometry 75x59 -title"
+    EM_TITLE="${NAME} - rfc${FN}.txt"
+  ;;
+  'mrxvt') EM=$(which mrxvt 2>/dev/null)
+    EM_ST="-hb -aht -fg green -bg black -bd green -g 72x59 -title"
+    EM_ST_LT="-bl -hb -aht -fg green -bg black -bd green -g 75x59 -title"
+    EM_TITLE="${NAME} - rfc${FN}.txt"
+  ;;
+  'urxvt') EM=$(which urxvt 2>/dev/null)
+    EM_ST="-fg green -bg black -bd green -g 72x59 -T"
+    EM_ST_LT="-fg green -bg black -bd green -g 75x59 -T"
+    EM_TITLE="${NAME} - rfc${FN}.txt"
+  ;;
 esac
-EM_SETTINGS="-fg green -bg black -bd green -g 72x59 -T"
-EM_SETTINGS_LATEST="-fg green -bg black -bd green -g 75x59 -T"
-EM_TITLE="${NAME} - rfc${FN}.txt"
 PAGER=`which less`
 
 # begin working section of the script
@@ -112,7 +128,7 @@ case "${1}" in
       awk '{line++;print}; /\f/ {for (i=line;i<=80;i++) print ""; line=0}' | \
       sed '/\f/d' > "${TMP_FILE}"
       printf -- "%s\n" "Showing latest rfc's"
-      ${EM} ${EM_SETTINGS_LATEST} "${EM_TITLE}" -e ${PAGER} "${TMP_FILE}"
+      ${EM} ${EM_ST_LT} "${EM_TITLE}" -e ${PAGER} "${TMP_FILE}"
   ;;
 
   'name'|'-n')
@@ -133,7 +149,7 @@ case "${1}" in
         awk '{line++;print}; /\f/ {for (i=line;i<=58;i++) print "";line=0}' | \
         sed '/\f/d' > "${TMP_FILE}"
       printf -- "%s\n" "Showing ${FN}"
-      ${EM} ${EM_SETTINGS} "${EM_TITLE}" -e ${PAGER} "${TMP_FILE}"
+      ${EM} ${EM_ST} "${EM_TITLE}" -e ${PAGER} "${TMP_FILE}"
     else
       printf -- "%s\n" "File does not exist or is not TXT. Check RFC # : ${FN}"
       usage
@@ -148,7 +164,7 @@ case "${1}" in
     curl -s ${ADDRESS}-index.txt | \
       awk 'BEGIN{FS="\n";RS="";ORS="\n\n"}/'[${FU}${FL}]${CW}'/' >"${TMP_FILE}"
     printf -- "%s\n" "Showing search for '${FL}${CW}'"
-    ${EM} ${EM_SETTINGS} "${EM_TITLE}" -e ${PAGER} "${TMP_FILE}"
+    ${EM} ${EM_ST} "${EM_TITLE}" -e ${PAGER} "${TMP_FILE}"
   ;;
 
   *) printf -- "\n"; usage; exit 1 ;;
