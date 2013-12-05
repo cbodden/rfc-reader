@@ -151,8 +151,6 @@ case "${OPTION}" in
   'name'|'-n')
     case "${FN}" in
       [0-9]|[0-9][0-9]|[0-9][0-9][0-9]|[0-9][0-9][0-9][0-9])
-      [ $TYPE == "ien" ] && curl -s ${ADDRESS}-index.txt | \
-        awk '/'${NUM}'/ {print}'
       curl -s ${ADDRESS}-index.txt | \
         awk '/^'${FN}'/ {do_print=1} do_print==1 {print} NF==0 {do_print=0}'
       LOGD name ${NUM} ${TYPE}
