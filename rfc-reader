@@ -123,7 +123,7 @@ if [ ${OPTION} != name ]; then
     'urxvt') EM=$(which urxvt 2>/dev/null)
       EM_ST="-fg green -bg black -bd green -g 75x59 -T"
     ;;
-    *) printf -- "Error: Terminal \"${EM}\" not found \n\n"; usage; exit 1
+    *) printf -- "Error: Terminal \"${TERM}\" not found \n\n"; usage; exit 1
   esac
   EM_TITLE="${NAME} - rfc${FN}.txt"
   PAGER=`which less`
