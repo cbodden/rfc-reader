@@ -3,8 +3,6 @@
 # vim:set ts=2 sw=4 noexpandtab:
 # <cesar@pissedoffadmins.com> 2013
 
-# todo :
-
 set -e
 set -o pipefail
 clear
@@ -12,7 +10,7 @@ NAME=$(basename $0)
 
 version()
 {
-  local VER="0.50"
+  local VER="1.01"
 cat <<EOL
 ${NAME} version ${VER}
 Copyright (C) 2013 cesar@pissedoffadmins.com
@@ -69,9 +67,7 @@ esac
 trap "rm -rf ${TMP_FILE}" 0 1 2 3 9 15
 
 # changing order for function handling
-OPTION=$1
-NUM=$2
-TYPE=$3
+OPTION=$1 ; NUM=$2 ; TYPE=$3
 
 # check if $1 != "search" || -s
 case "${OPTION}" in

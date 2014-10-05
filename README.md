@@ -41,7 +41,9 @@ Requirements
 - cURL (http://curl.haxx.se/)
 - and a terminal emulator of some sort, either:
 - Xterm (http://invisible-island.net/xterm/)
+- aterm (http://aterm.sourceforge.net)
 - mrxvt (http://materm.sourceforge.net/)
+- rxvt (http://rxvt.sourceforge.net/)
 - urxvt (http://software.schmorp.de/pkg/rxvt-unicode.html)
 
 Todo / Add
