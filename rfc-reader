@@ -64,7 +64,8 @@ case "$(uname 2>/dev/null)" in
   'Linux') TMP_FILE=$(mktemp --tmpdir rfc.$$.XXXXXXXXXX) ;;
   'Darwin') TMP_FILE=$(mktemp rfc.$$.XXXXXXXXXX) ;;
 esac
-trap "rm -rf ${TMP_FILE}" 0 1 2 3 9 15
+trap 'printf "${NAME}: Quitting.\n\n" 1>&2 ; \
+   rm -rf ${TMP_FILE} ; exit 1' 0 1 2 3 9 15
 
 # changing order for function handling
 OPTION=$1 ; NUM=$2 ; TYPE=$3
@@ -117,7 +118,7 @@ fi
 # output is format : date option num type term # as set in all the option cases
 LOGD()
 {
-  LOGFILE=/tmp/$0
+  local LOGFILE=/tmp/$0
   printf "%-14s %-8s %-5s %-4s %-4s\n" `date "+%Y%m%d_%H%M"` \
     "[${1}]" "${2}" "${3}" "${4}" >> ${LOGFILE}
 }
@@ -161,10 +162,10 @@ case "${OPTION}" in
   ;;
 
   'search'|'-s')
-    F=`echo ${NUM} | head -c 1`
-      FU=`echo ${F} | tr -s '[:lower:]' '[:upper:]'`
-      FL=`echo ${F} | tr -s '[:upper:]' '[:lower:]'`
-    CW=`echo ${NUM} | cut -c2-`
+    local F=$(echo ${NUM} | head -c 1)
+    local FU=$(echo ${F} | tr -s '[:lower:]' '[:upper:]')
+    local FL=$(echo ${F} | tr -s '[:upper:]' '[:lower:]')
+    local CW=$(echo ${NUM} | cut -c2-)
     curl -s ${ADDRESS}-index.txt | \
       awk 'BEGIN{FS="\n";RS="";ORS="\n\n"}/'[${FU}${FL}]${CW}'/' >"${TMP_FILE}"
     LOGD search ${NUM} - -
