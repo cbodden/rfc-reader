@@ -99,34 +99,22 @@ esac
 
 # emulator / viewer settings and checks
 if [ ${OPTION} != name ]; then
-  printf -- "%s\n" "Here are the terminals available, choose one:"
-  TM=0
-  [[ -n $(command -v xterm) ]] && { echo xterm; TM=$((TM+1)); }
-  [[ -n $(command -v mrxvt) ]] && { echo mrxvt; TM=$((TM+1)); }
-  [[ -n $(command -v urxvt) ]] && { echo urxvt; TM=$((TM+1)); }
-
-  if [ ${TM} -eq 0 ]; then
-    printf -- "Error: Terminal not found \n\n"; usage; exit 1
+  CNT=0
+  TERM_LIST="aterm mrxvt rxvt urxvt xterm"
+  PAGER=$(which less)
+  EM_ST="-fg green -bg black -bd green -geometry 75x59 -title"
+  declare -a _TERM=($(for _TN in ${TERM_LIST}; do command -v ${_TN}; done))
+  if [ $(echo ${#_TERM[@]}) -gt 1 ]; then
+    printf -- "%s\n" "Here are the terminals available, choose one:"
+    for _LIST in "${_TERM[@]}"; do echo [${CNT}] ${_LIST}; CNT=$((CNT+1)); done
+    printf "%s" "Enter term number and press [ENTER]: "
+    read TERM_IN
+    EM="${_TERM[${TERM_IN}]}"
+  elif [ $(echo ${#_TERM[@]}) -eq 1 ]; then
+    EM=$(echo ${_TERM[1]})
   else
-    printf "%s" "Enter Term and press [ENTER]: "
-    read TERM
-    TERM=`echo ${TERM} | tr '[:upper:]' '[:lower:]'`
+    printf -- "Error: Terminal not found \n\n"; usage; exit 1
   fi
-
-  case "${TERM}" in
-    'xterm') EM=$(which xterm 2>/dev/null)
-      EM_ST="+sb -fg green -bg black -bd green -geometry 75x59 -title"
-    ;;
-    'mrxvt') EM=$(which mrxvt 2>/dev/null)
-      EM_ST="-bl -hb -aht -fg green -bg black -bd green -g 75x59 -title"
-    ;;
-    'urxvt') EM=$(which urxvt 2>/dev/null)
-      EM_ST="-fg green -bg black -bd green -g 75x59 -T"
-    ;;
-    *) printf -- "Error: Terminal \"${TERM}\" not found \n\n"; usage; exit 1
-  esac
-  EM_TITLE="${NAME} - rfc${FN}.txt"
-  PAGER=`which less`
 fi
 
 # logging function
